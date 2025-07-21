@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  mokutanway-chart:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-07-21T19:33:35.9472744+02:00"
+    description: A Helm chart for Kubernetes
+    digest: b3fa2b29f1f15c2fc292d035d2d3b11fae1a9d704e0761b6c7a6a37aded1f795
+    name: mokutanway-chart
+    type: application
+    urls:
+    - mokutanway-chart-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-07-21T19:33:35.9460767+02:00"
