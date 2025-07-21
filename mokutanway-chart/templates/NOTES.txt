@@ -1,0 +1,4 @@
+Thank you for installing mokutanway-chart!
+
+This chart has been deployed using the default values.
+To customize, edit the values.yaml file before install.
