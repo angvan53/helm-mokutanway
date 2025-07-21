@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🧠 Hands-on Kubernetes-08: Helm Basics (mokutanway)
 
 ![Helm Basics](./images/helm-intro.png) 
@@ -234,3 +235,6 @@ helm-mokutaway/
 
 GitHub: angvan53  
 Project: helm-mokutaway
+=======
+# helm-mokutaway
+>>>>>>> eb6dcba1ba918072efb99d11a03b62f8d36bddf3
