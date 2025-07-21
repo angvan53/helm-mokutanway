@@ -1,6 +1,6 @@
 # 🧠 Hands-on Kubernetes-08: Helm Basics (mokutanway)
 
-![Helm Basics](./images/helm-intro.png) 
+![Helm Basics](./images/helm-intro.png)
 
 > 📦 This project provides a hands-on learning experience to master **Helm** – the package manager for Kubernetes.
 
@@ -19,11 +19,11 @@ By the end of this hands-on training, you will be able to:
 
 ## 🗂️ Outline
 
-1. ✅ Setting up the Kubernetes Cluster
-2. 📦 Basic Operations with Helm
-3. 🛠️ Creating a Helm Chart (mokutanway)
-4. 🌍 Hosting a Helm Repository
-5. 🔄 GitHub Repo Integration
+1. ✅ Setting up the Kubernetes Cluster  
+2. 📦 Basic Operations with Helm  
+3. 🛠️ Creating a Helm Chart (`mokutanway`)  
+4. 🌍 Hosting a Helm Repository  
+5. 🔄 GitHub Repo Integration  
 
 ---
 
@@ -36,6 +36,8 @@ kubectl cluster-info
 kubectl get nodes
 ```
 
+---
+
 ## 📦 Part 2: Basic Helm Operations
 
 ### Install Helm
@@ -45,14 +47,14 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 helm version
 ```
 
-### Initialize Helm and add stable repo
+### Add Helm Repositories
 
 ```bash
 helm repo add stable https://charts.helm.sh/stable 
 helm repo update
 ```
 
-### Verify Helm installation
+### Verify Installation
 
 ```bash
 helm version  
@@ -62,7 +64,7 @@ helm install my-release stable/nginx-ingress
 helm list
 ```
 
-### Add Bitnami repo & install chart
+### Add Bitnami repo & install MySQL chart
 
 ```bash 
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -77,7 +79,7 @@ helm uninstall my-mysql
 
 ---
 
-## 🛠️ Part 3: Creating a Helm Chart – mokutanway
+## 🛠️ Part 3: Creating a Helm Chart – `mokutanway`
 
 ### Create chart
 
@@ -87,9 +89,9 @@ rm -rf mokutanway-chart/templates/*
 touch mokutanway-chart/templates/configmap.yaml
 ```
 
-### Add the following to configmap.yaml
+### configmap.yaml
 
-```yaml 
+```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -98,7 +100,7 @@ data:
   myvalue: "Hello Helm World"
 ```
 
-### Install chart
+### Install and Inspect
 
 ```bash
 helm install demo mokutanway-chart
@@ -124,7 +126,9 @@ helm upgrade demo mokutanway-chart
 kubectl describe configmap mokutanway-config
 ```
 
-### Dynamic values: values.yaml
+---
+
+### Dynamic values – values.yaml
 
 ```yaml
 course: DevOps
@@ -132,27 +136,37 @@ lesson:
   topic: helm
 ```
 
-### Use in configmap.yaml
+### Use values in configmap.yaml
 
 ```yaml
 data:
   course: {{ quote .Values.course }}
   topic: {{ upper .Values.lesson.topic }}
-  time: {{ now | date "2006.01.02" | quote }}
+  time: {{ 'now' | date: "%Y.%m.%d" | quote }}
 ```
+
+> Bu kısım sadece Helm chart içinde çalışır, README'de değil.
 
 ---
 
 ## 📜 Adding NOTES.txt
 
 ```txt
-Thank you for installing {{ .Chart.Name }}!
+🎉 Thank you for installing <chart-name>!
 
-Your release is named {{ .Release.Name }}
+✅ Your release is named: <release-name>
 
-Useful Commands:
-  $ helm status {{ .Release.Name }}
-  $ helm get all {{ .Release.Name }}
+To check the status of your release:
+  $ helm status <release-name>
+
+To get all information about the release:
+  $ helm get all <release-name>
+
+📘 Documentation: https://github.com/angvan53/helm-mokutanway
+
+To access your application:
+  $ kubectl get svc --namespace <namespace> -w
+  URL: http://<release-name>.<namespace>.svc.cluster.local
 ```
 
 ```bash
@@ -169,20 +183,22 @@ helm package ../mokutanway-chart
 helm repo index .
 ```
 
-### Push to GitHub
+---
+
+## ☁️ GitHub Repo Integration
 
 ```bash
 git init
 git add .
 git commit -m "Initial commit"
-git remote add origin https://github.com/angvan53/helm-mokutaway.git
+git remote add origin https://github.com/angvan53/helm-mokutanway.git
 git push -u origin main
 ```
 
 ### Add repo locally
 
 ```bash
-helm repo add my-mokutan-repo https://raw.githubusercontent.com/angvan53/helm-mokutaway/main
+helm repo add my-mokutan-repo https://angvan53.github.io/helm-mokutanway/
 helm repo update
 helm search repo my-mokutan-repo
 ```
@@ -192,7 +208,9 @@ helm search repo my-mokutan-repo
 ## 📞 Example Chart Deployment
 
 ```bash
-helm upgrade --install phonebook-app my-mokutan-repo/phonebook-chart   --set webserver_image=nginx   --set resultserver_image=httpd
+helm upgrade --install phonebook-app my-mokutan-repo/phonebook-chart \
+  --set webserver_image=nginx \
+  --set resultserver_image=httpd
 ```
 
 ---
@@ -210,13 +228,15 @@ helm repo index .
 
 ## 🔒 Private Deployment Note
 
-This repository is kept private for security. Ensure secrets are not committed and consider using .gitignore for sensitive Helm values or token files.
+This repository is kept private for security.  
+Ensure secrets are not committed and consider using `.gitignore` for sensitive Helm values or token files.
 
 ---
 
 ## 📂 Project Structure
 
-helm-mokutaway/
+```
+helm-mokutanway/
 │
 ├── mokutanway-chart/
 │   ├── templates/
@@ -227,13 +247,11 @@ helm-mokutaway/
 ├── images/
 │   └── helm-intro.png
 └── README.md
+```
 
 ---
 
 ## 👤 Author
 
-GitHub: angvan53  
+GitHub: [angvan53](https://github.com/angvan53)  
 Project: helm-mokutanway
-=======
-# helm-mokutaway
-Okutan 
