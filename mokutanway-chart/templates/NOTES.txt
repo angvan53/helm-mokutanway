@@ -1,4 +1,7 @@
-Thank you for installing mokutanway-chart!
+Thank you for installing {{ .Chart.Name }}!
 
-This chart has been deployed using the default values.
-To customize, edit the values.yaml file before install.
+Your release is named {{ .Release.Name }}
+
+Useful Commands:
+  $ helm status {{ .Release.Name }}
+  $ helm get all {{ .Release.Name }}
