@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🧠 Hands-on Kubernetes-08: Helm Basics (mokutanway)
 
 ![Helm Basics](./images/helm-intro.png) 
